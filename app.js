@@ -1,4 +1,4 @@
-window.onload = function(){
+wiwindow.onload = function(){
     setGame();
 }
 
@@ -11,7 +11,7 @@ function setGame() {
         document.getElementById("board").appendChild(tile);//creates new divs in the board section of the html
     }
 
-    setInterval(createSkell, 2000); //every 2 secs a skeleton will appear in a random tile
+    setInterval(createFreddy, 2000); //every 2 secs a skeleton will appear in a random tile
 
 }
 
@@ -21,12 +21,20 @@ function getRandomTile(){
     return num.toString();
 }
 
-function createSkell() {
-    let badGuy = document.createElement("img");
-    badGuy.src = "./assets/bad-guy.png";
+function createFreddy() {
+    // freddyTile = document.getElementById(prevNum);
+
+    if(freddyTile){
+        // freddyTile = document.getElementById(prevNum);
+        freddyTile.innerHTML = "";
+    }  
+
+    let freddy = document.createElement("img");
+    freddy.src = "./assets/bad-guy.png";
 
     let num = getRandomTile();
-    badGuyTile = document.getElementById(num);
-    badGuyTile.appendChild(badGuy);
+    let freddyTile = document.getElementById(num);
+    freddyTile.appendChild(freddy); 
+    // let prevNum = num;
 
 }
