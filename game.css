@@ -7,8 +7,8 @@ body{
 }   
 
 #board{
-    width: 600px;
-    height: 600px;
+    width: 540px;
+    height: 540px;
     background: url('./assets/brick-bg.png');
     background-size: cover;
     margin: 0 auto;
@@ -21,8 +21,8 @@ body{
 
 #board div{
     /* board is 600 x 600 each tile should be 1/3 of the board*/
-    width: 200px;
-    height:200px;
+    width: 180px;
+    height:180px;
     background-image: url('./assets/hole.png');
     background-size: cover;
 }
@@ -31,5 +31,5 @@ body{
     /*keeps the bad guy in the tile*/
     width:100%;
     height:100%;
-    margin-left: 15px;
+    z-index: 4;
 }
