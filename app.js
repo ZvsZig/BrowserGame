@@ -3,37 +3,34 @@ let aftonTile;
 let score = 0;
 let gameOver = false;
 
-window.onload = function () {
+window.onload = function() {
     setGame();
-};
+}
 
 function setGame() {
-    //set up game on the grid
-    for (let i = 0; i < 9; i++) {
-        //i starts from 0 ends at 9
-        //creates div tags with the id tags numbered "0-8" to let us know which game tile was clicked
+    for (let i = 0; i < 9; i++) {   
         let tile = document.createElement("div");
         tile.id = i.toString();
-        // tile.addEventListener("click", selectTile);
-        document.getElementById("board").appendChild(tile); //creates new divs in the board section of the html
+        tile.addEventListener("click", selectTile);
+        document.getElementById("board").appendChild(tile);
     }
-
-    setInterval(createFreddy, 1000); //every 1 secs Freddy will appear in a random tile
-    setInterval(createAfton, 2000); //every 2 secs Afton will appear in a random tile
+    setInterval(createFreddy, 1000); // creates a Freddy every second
+    setInterval(createAfton, 2000); // creates Afton every 2 seconds
 }
 
 function getRandomTile() {
+    //math.random --> 0-1 --> (0-1) * 9 = (0-9) --> round down to (0-8) integers
     let num = Math.floor(Math.random() * 9);
     return num.toString();
 }
 
 function createFreddy() {
-    setTimeout(() => {
-        if (freddyTile) {
-            freddyTile.innerHTML = "";
-        }
-    }, 1000);
-
+    if (gameOver) {
+        return;
+    }
+    if (freddyTile) {
+        freddyTile.innerHTML = "";
+    }
     let freddy = document.createElement("img");
     freddy.src = "./assets/bad-guy.png";
 
@@ -41,33 +38,38 @@ function createFreddy() {
     if (aftonTile && aftonTile.id == num) {
         return;
     }
-    let freddyTile = document.getElementById(num);
+    freddyTile = document.getElementById(num);
     freddyTile.appendChild(freddy);
-    freddyTile.addEventListener("click", () => {
-        score += 1; {
-            document.getElementById("score").innerText = score.toString();
-        }
-    })
 }
 
 function createAfton() {
-    setTimeout(() => {
-        if (aftonTile) {
-            aftonTile.innerHTML = "";
-        }
-    }, 2000);
-
-    let afton = document.createElement("img");
-    afton.src = "./assets/purp-guy.png";
+    if (gameOver) {
+        return;
+    }
+    if (aftonTile) {
+        aftonTile.innerHTML = "";
+    }
+    let plant = document.createElement("img");
+    plant.src = "./assets/purp-guy.png";
 
     let num = getRandomTile();
     if (freddyTile && freddyTile.id == num) {
         return;
     }
-    let aftonTile = document.getElementById(num);
-    aftonTile.appendChild(afton);
-    aftonTile.addEventListener("click", () => {
-        document.getElementById("score").innerText = "GAME OVER: " + score.toString();
+    aftonTile = document.getElementById(num);
+    aftonTile.appendChild(plant);
+}
+
+function selectTile() {
+    if (gameOver) {
+        return;
+    }
+    if (this == freddyTile) {
+        score += 10;
+        document.getElementById("score").innerText = score.toString(); //updates the score and changes the html element
+    }
+    else if (this == aftonTile) {
+        document.getElementById("score").innerText = "GAME OVER: " + score.toString(); //triggers game over state and shuts off game 
         gameOver = true;
-    })
+    }
 }
