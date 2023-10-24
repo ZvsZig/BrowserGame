@@ -49,15 +49,15 @@ function createAfton() {
     if (aftonTile) {
         aftonTile.innerHTML = "";
     }
-    let plant = document.createElement("img");
-    plant.src = "./assets/purp-guy.png";
+    let afton = document.createElement("img");
+    afton.src = "./assets/purp-guy.png";
 
     let num = getRandomTile();
     if (freddyTile && freddyTile.id == num) {
         return;
     }
     aftonTile = document.getElementById(num);
-    aftonTile.appendChild(plant);
+    aftonTile.appendChild(afton);
 }
 
 function selectTile() {
@@ -71,5 +71,9 @@ function selectTile() {
     else if (this == aftonTile) {
         document.getElementById("score").innerText = "GAME OVER: " + score.toString(); //triggers game over state and shuts off game 
         gameOver = true;
+        let jump = document.createElement("video");
+        jump.src = "./assets/jump.mp4";
+        jump.autoplay = true;
+        document.getElementById("board").appendChild(jump);
     }
 }
