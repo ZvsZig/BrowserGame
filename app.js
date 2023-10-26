@@ -2,6 +2,8 @@ let freddyTile;
 let aftonTile;
 let score = 0;
 let gameOver = false;
+let seconds = 0;
+let time = document.getElementById("time");
 
 window.onload = function() {
     setGame();
@@ -15,7 +17,7 @@ function setGame() {
         document.getElementById("board").appendChild(tile);
     }
     setInterval(createFreddy, 1000); // creates a Freddy every second
-    setInterval(createAfton, 2000); // creates Afton every 2 seconds
+    setInterval(createAfton, 2000); // creates Afton every 2 seconds 
 }
 
 function getRandomTile() {
@@ -77,3 +79,9 @@ function selectTile() {
         document.getElementById("board").appendChild(jump);
     }
 }
+
+function getTime(){
+    seconds ++;
+    time.innerText = seconds;
+}
+setInterval(getTime, 1000);
