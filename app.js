@@ -5,12 +5,12 @@ let gameOver = false;
 let seconds = 0;
 let time = document.getElementById("time");
 
-window.onload = function() {
+window.onload = function () {
     setGame();
 }
 
 function setGame() {
-    for (let i = 0; i < 9; i++) {   
+    for (let i = 0; i < 9; i++) {
         let tile = document.createElement("div");
         tile.id = i.toString();
         tile.addEventListener("click", selectTile);
@@ -77,11 +77,19 @@ function selectTile() {
         jump.src = "./assets/jump.mp4";
         jump.autoplay = true;
         document.getElementById("board").appendChild(jump);
+        const reloadButton = document.createElement("button");
+        reloadButton.textContent = "Play again";
+
+        reloadButton.addEventListener("click", function () {
+            location.reload(); // Reload the page
+        });
+
+        document.body.appendChild(reloadButton);
     }
 }
 
-function getTime(){
-    seconds ++;
+function getTime() {
+    seconds++;
     time.innerText = seconds;
 }
 setInterval(getTime, 1000);
